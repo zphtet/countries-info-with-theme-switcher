@@ -7,11 +7,26 @@
     <link rel="stylesheet" href="./src/output.css" />
     <title>Countries</title>
   </head>
-  <body class="bg-white-all dark:bg-dblue">
-    <h1 class="text-3xl text-dblue dark:text-white-all">
-      Search Your Favourite Countries
-    </h1>
-    <button class="border border-red-600">Toggle Theme</button>
+  <body class="bg-white-all dark:bg-dblue-bg">
+    <header class="max-w-container mx-auto px-5 shadow dark:bg-dblue">
+      <div
+        class="py-6 flex items-center justify-between text-dblue-text dark:text-white-all"
+      >
+        <h1 class="text-3xl font-bold">Where in the World ?</h1>
+        <div>
+          <button
+            class="flex items-center gap-2 px-4 py-2 rounded hover:bg-slate-100 dark:hover:bg-dblue-bg"
+          >
+            <img
+              class="w-5 h-5 dark:hover:invert dark:invert"
+              src="./src/assets/img/moon.png"
+              alt="mode image"
+            />
+            <span> DarkMode </span>
+          </button>
+        </div>
+      </div>
+    </header>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
