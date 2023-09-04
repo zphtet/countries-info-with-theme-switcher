@@ -7,10 +7,11 @@ export default {
       sans: ["Nunito Sans", "sans-serif"],
     },
     screens: {
-      pc: { max: "1200px" },
+      pc: { max: "1100px" },
       // => @media (max-width: 1535px) { ... }
       tb: { max: "768px" },
       // => @media (max-width: 1279px) { ... }
+      tbs: { max: "550px" },
 
       ml: { max: "425px" },
       // => @media (max-width: 1023px) { ... }

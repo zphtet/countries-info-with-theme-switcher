@@ -7,26 +7,213 @@
     <link rel="stylesheet" href="./src/output.css" />
     <title>Countries</title>
   </head>
-  <body class="bg-white-all dark:bg-dblue-bg">
-    <header class="max-w-container mx-auto px-5 shadow dark:bg-dblue">
+  <body class="bg-very-lgray dark:bg-dblue-bg">
+    <header class="max-w-container mx-auto px-5 shadow-md dark:bg-dblue">
       <div
         class="py-6 flex items-center justify-between text-dblue-text dark:text-white-all"
       >
-        <h1 class="text-3xl font-bold">Where in the World ?</h1>
+        <h1 class="text-3xl font-bold tb:text-2xl ml:text-xl mm:text-lg">
+          Where in the World ?
+        </h1>
         <div>
           <button
-            class="flex items-center gap-2 px-4 py-2 rounded hover:bg-slate-100 dark:hover:bg-dblue-bg"
+            class="flex items-center gap-2 px-4 py-2 rounded hover:bg-slate-100 dark:hover:bg-dblue-bg ml:px-3"
+            id="mode-btn"
           >
             <img
-              class="w-5 h-5 dark:hover:invert dark:invert"
+              class="w-5 h-5 dark:hover:invert dark:invert ml:w-4 ml:h-4"
               src="./src/assets/img/moon.png"
               alt="mode image"
             />
-            <span> DarkMode </span>
+            <span class="ml:text-sm"> DarkMode </span>
           </button>
         </div>
       </div>
     </header>
+    <section
+      class="max-w-container mx-auto px-5 py-8 flex items-center justify-between tb:flex-col tb:items-stretch tb:gap-5 tb:py-5 tbs:py-4"
+    >
+      <form class="search-form max-w-md flex-1 dark:text-white">
+        <div
+          class="input-group flex items-stretch bg-white-all rounded-md shadow overflow-hidden dark:bg-dblue-bg"
+        >
+          <div
+            class="basis-14 bg-very-lgray flex items-center justify-center dark:bg-dblue-bg"
+          >
+            <img
+              class="w-5 h-5 dark:invert"
+              src="./src/assets/img/search.png"
+              alt="Search Icon"
+            />
+          </div>
+          <div class="flex-1 bg-blue-400">
+            <input
+              type="text"
+              class="py-3 pl-3 w-full outline-none dark:bg-dblue"
+              placeholder="Search a country you want ... "
+            />
+          </div>
+        </div>
+      </form>
+
+      <form class="select-form max-w-[300px]">
+        <!-- <label for="region">Choose Region</label> -->
+        <select
+          id="regions"
+          class="px-4 py-3 rounded-lg w-[200px] text-dblue-text dark:text-white-all dark:bg-dblue"
+        >
+          <option selected>Choose a region</option>
+          <option value="US">Asia</option>
+          <option value="CA">Africa</option>
+          <option value="FR">Middle East</option>
+          <option value="DE">Europe</option>
+        </select>
+      </form>
+    </section>
+
+    <section class="max-w-container mx-auto px-5 py-5 tbs:py-0 mb-14">
+      <div class="country-cards max-[500px]:border-2">
+        <!-- card one -->
+        <div class="card">
+          <div class="img-container w-full">
+            <a href="#" class="block">
+              <img
+                class="w-full object-cover"
+                src="./src/assets/img/mr.svg"
+                alt="country img"
+              />
+            </a>
+          </div>
+          <div class="info pt-4 pb-12 px-5">
+            <h3 class="mb-4">
+              <a href="#" class="text-2xl tb:text-xl font-semibold">Austrila</a>
+            </h3>
+            <p class="my-1 font-bold">
+              Population : <span class="font-normal">23,567,120</span>
+            </p>
+            <p class="my-1 font-bold">
+              Region : <span class="font-normal">Asia</span>
+            </p>
+            <p class="my-1 font-bold">
+              Capital : <span class="font-normal">Darusalam</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- card two -->
+        <div class="card">
+          <div class="img-container w-full">
+            <a href="#" class="block">
+              <img
+                class="w-full object-cover"
+                src="./src/assets/img/mr.svg"
+                alt="country img"
+              />
+            </a>
+          </div>
+          <div class="info pt-4 pb-12 px-5">
+            <h3 class="mb-4">
+              <a href="#" class="text-2xl tb:text-xl font-semibold">Austrila</a>
+            </h3>
+            <p class="my-1 font-bold">
+              Population : <span class="font-normal">23,567,120</span>
+            </p>
+            <p class="my-1 font-bold">
+              Region : <span class="font-normal">Asia</span>
+            </p>
+            <p class="my-1 font-bold">
+              Capital : <span class="font-normal">Darusalam</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-container mx-auto px-5 py-5 border mb-5">
+      <div>
+        <button
+          class="flex items-center gap-2 py-2 px-4 bg-white-all shadow rounded-md hover:opacity-60"
+        >
+          <img
+            class="w-5"
+            src="./src/assets/img/arrow-left.png"
+            alt="arrow left"
+          />
+          <span>Back</span>
+        </button>
+        <div
+          class="detail flex gap-10 tb:gap-4 items-center mt-5 tb:flex-col tb:items-start"
+        >
+          <div class="detail-img-container max-w-[40%] tb:w-full tb:max-w-full">
+            <img
+              class="w-full h-full object-contain"
+              src="./src/assets/img/mr.svg"
+              alt="country image"
+            />
+          </div>
+          <div class="flex-1 pb-3 dark:text-white-all">
+            <h3 class="text-3xl font-bold mb-5 tb:text-2xl ml:text-xl tb:mb-3">
+              Common Wealth of Austrila
+            </h3>
+            <div class="text-base font-bold detail-infos">
+              <p class="detail-item">
+                Native Name :
+                <span class="text-normal font-normal">Austrila</span>
+              </p>
+              <p class="detail-item">
+                Top level domain :
+                <span class="text-normal font-normal">.au</span>
+              </p>
+              <p class="detail-item">
+                Population :
+                <span class="text-normal font-normal">27,234,120</span>
+              </p>
+              <p class="detail-item">
+                Currencies :
+                <span class="text-normal font-normal">Austrilan dollar </span>
+              </p>
+              <p class="detail-item">
+                Region : <span class="text-normal font-normal">Oceania</span>
+              </p>
+              <p class="detail-item">
+                Languages : <span class="text-normal font-normal">English</span>
+              </p>
+              <p class="detail-item">
+                Sub Region :
+                <span class="text-normal font-normal"
+                  >Austrial and Newzeland</span
+                >
+              </p>
+              <p class="detail-item">
+                Capital : <span class="text-normal font-normal">Cabriea</span>
+              </p>
+            </div>
+            <div
+              class="rel-border text-base mt-5 flex items-center gap-5 ml:flex-col ml:items-start ml:gap-2"
+            >
+              <p class="font-bold basis-[120px] tb:basis-auto">
+                Border Countries
+              </p>
+              <div class="borders flex-1">
+                <a href="#" class="border-item"> Laos </a>
+                <a href="#" class="border-item"> India </a>
+                <a href="#" class="border-item"> Thailand </a>
+                <a href="#" class="border-item"> China </a>
+                <a href="#" class="border-item"> Cambodia </a>
+
+                <a href="#" class="border-item"> Laos </a>
+                <a href="#" class="border-item"> India </a>
+                <a href="#" class="border-item"> Thailand </a>
+                <a href="#" class="border-item"> China </a>
+                <a href="#" class="border-item"> Cambodia </a>
+                <!-- <a href="#" class="border-item"> Laos </a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
