@@ -1,5 +1,4 @@
-const html: HTMLElement | null = document.querySelector("html");
-
+const html = document.querySelector("html");
 const button = document.querySelector("#mode-btn");
 const modeIcon = button?.querySelector("img");
 const modeText = button?.querySelector("span");

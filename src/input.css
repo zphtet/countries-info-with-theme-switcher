@@ -6,7 +6,7 @@
 
 @layer base {
   * {
-    @apply transition-colors duration-200;
+    @apply transition-colors duration-100;
   }
 }
 
@@ -14,10 +14,10 @@
   .card {
     /* gap : 30 */
     @apply rounded-md shadow-lg bg-white-all w-[calc((100%-90px)/4)] overflow-hidden pc:w-[calc((100%-60px)/3)] tb:w-[calc((100%-20px)/2)]
-     tbs:w-[min(400px,100%)] dark:bg-dblue dark:text-white-all;
+     tbs:w-[min(400px,100%)] dark:bg-dblue dark:text-white-all tbs:mx-auto;
   }
   .country-cards {
-    @apply flex gap-[30px] py-5 flex-wrap tb:gap-[20px] tbs:flex-col items-center;
+    @apply flex gap-[30px] py-5 flex-wrap tb:gap-[20px] tbs:flex-col items-stretch;
   }
   .detail-infos {
     @apply flex flex-wrap gap-x-5 ml:flex-col ml:gap-0;
