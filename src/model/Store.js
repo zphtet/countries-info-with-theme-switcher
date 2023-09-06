@@ -49,11 +49,18 @@ export async function getAllCountries() {
   proxiedStore.countries = data;
 }
 
-export async function getCountryByName(name) {
+export async function getCountryByName(name, detail = true) {
+  if (!name) return;
+  // ?fullText=true
+  let transformName = name.split(".").join(" ").toLowerCase();
   const res = await fetch(
-    `https://restcountries.com/v3.1/name/${name.toLowerCase()}`
+    `https://restcountries.com/v3.1/name/${transformName}`
   );
   const data = await res.json();
+  if (!detail) {
+    proxiedStore.countries = data;
+    return;
+  }
   proxiedStore.country = data;
 }
 

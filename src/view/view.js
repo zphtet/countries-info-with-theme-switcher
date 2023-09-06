@@ -1,10 +1,7 @@
-import {
-  preventProp,
-  formatNum,
-  getCurrency,
-  getLanguage,
-  getCountryName,
-} from "../utils/util";
+import { formatNum, getCurrency, getLanguage } from "../utils/util";
+
+import country from "country-list-js";
+// countries.registerLocale(import * from "i18n-iso-countries/langs/en.json");
 
 // utilities funcion
 
@@ -13,10 +10,15 @@ export function renderAllCountries(data, selector) {
   main.innerHTML = " ";
   const div = document.createElement("div");
   div.className = "country-cards";
+  console.log(data);
+  if (!data || data.length === 0 || data.status === 404)
+    return (main.innerHTML =
+      "<div> <h1 class='text-3xl mb-5 dark:text-white-all'> No country found with this Name </h1> <a href='/' class='border py-1 px-4 rounded cursor-pointer mt-4 dark:text-white-all' >  Reload </a> </div>");
   data?.forEach((country) => {
     const { name, capital, population, region, flags } = country;
+    const commonName = name.common.split(" ").join(".");
     div.innerHTML += `
-        <div class="card" data-name=${name.common}>
+        <div class="card" data-name=${commonName}>
           <div class="img-container w-full">
             <a  class="block cursor-pointer" id="back-btn">
               <img
@@ -53,24 +55,31 @@ export function renderAllCountries(data, selector) {
 //
 
 const renderBorderCountries = (borders) => {
-  const borderEle = document.querySelector(".borders");
+  const borderEle = document.querySelector("#borders");
   if (!borders || borders.length === 0) {
     borderEle.innerHTML = `<p class="text-2xl font-bold"> None </p>`;
     return;
   }
   borders.forEach((shortCode) => {
+    console.log(shortCode);
+    // let found = country.findByIso3("BGD");
+    const countryName = country.findByIso3(shortCode).name;
+    const forName = countryName.split(" ").join(".");
+
     borderEle.innerHTML += `
-           <a href="#" class="border-item" data-name=${getCountryName(
-             shortCode
-           )}>
-                    ${getCountryName(shortCode)}
-                  </a>
+           <a class="border-item cursor-pointer" data-name=${forName}>
+                    ${countryName}
+           </a>
         `;
   });
 };
 
 export function renderDetail(data, selector) {
   const parEle = document.querySelector(selector);
+
+  if (!data)
+    return (parEle.innerHTML =
+      "<div> <h1 class='text-3xl mb-5 dark:text-white-all'> No country found with this Name </h1> <a href='/' class='border py-1 px-4 rounded cursor-pointer mt-4 dark:text-white-all' >  Reload </a> </div>");
   const {
     flags,
     population,
@@ -83,6 +92,7 @@ export function renderDetail(data, selector) {
     languages,
     borders,
   } = data;
+
   parEle.innerHTML = `
     
     <div>
@@ -103,7 +113,7 @@ export function renderDetail(data, selector) {
           <div class="detail-img-container w-[40%] tb:w-full tb:max-w-full">
             <img
               class="w-full h-full object-cover "
-              src=${flags.png || flags.svg}
+              src=${flags.svg || flags.png}
               alt=${flags.alt}
             />
           </div>
@@ -160,7 +170,7 @@ export function renderDetail(data, selector) {
               <p class="font-bold basis-[120px] tb:basis-auto">
                 Border Countries
               </p>
-              <div class="borders flex-1">
+              <div id="borders" class="borders flex-1">
 
               </div>
             </div>

@@ -29,6 +29,6 @@
     @apply flex flex-wrap gap-2;
   }
   .border-item {
-    @apply border px-5 py-1 bg-white-all rounded-md shadow dark:text-dblue-text;
+    @apply border px-5 py-1 cursor-pointer bg-white-all rounded-md shadow dark:text-dblue-text;
   }
 }

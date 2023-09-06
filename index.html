@@ -33,7 +33,10 @@
     <section
       class="max-w-container mx-auto px-5 py-8 flex items-center justify-between tb:flex-col tb:items-stretch tb:gap-5 tb:py-5 tbs:py-4"
     >
-      <form class="search-form max-w-md flex-1 dark:text-white">
+      <form
+        id="search-form"
+        class="search-form max-w-md flex-1 dark:text-white"
+      >
         <div
           class="input-group flex items-stretch bg-white-all rounded-md shadow overflow-hidden dark:bg-dblue-bg"
         >
@@ -51,6 +54,7 @@
               type="text"
               class="py-3 pl-3 w-full outline-none dark:bg-dblue"
               placeholder="Search a country you want ... "
+              id="search-input"
             />
           </div>
         </div>

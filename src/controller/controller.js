@@ -15,7 +15,7 @@ getAllCountries();
 window.addEventListener("countries_change", function () {
   console.log("loaded all countries");
   const { countries } = proxiedStore;
-  countries.length = 12;
+  if (countries.length > 1) countries.length = 12;
   renderAllCountries(countries, "#main-sec");
 });
 
@@ -31,11 +31,19 @@ window.addEventListener("single_country", function () {
 
 window.addEventListener("click", function (e) {
   const cardEle = e.target.closest(".card");
-  if (cardEle) {
-    console.log(cardEle.dataset.name);
-    proxiedStore.selectedCountry = cardEle.dataset.name;
-    getCountryByName(proxiedStore.selectedCountry);
+  const bordEle = e.target.closest(".border-item");
+  // console.log(bordEle);
+  let value = null;
+
+  if (bordEle) {
+    value = bordEle.dataset.name.toLowerCase();
+    proxiedStore.selectedCountry = value;
   }
+  if (cardEle) {
+    value = cardEle.dataset.name;
+    proxiedStore.selectedCountry = value;
+  }
+  getCountryByName(value);
 });
 
 window.addEventListener("click", function (e) {
@@ -46,4 +54,27 @@ window.addEventListener("click", function (e) {
   const { countries } = proxiedStore;
   countries.length = 12;
   renderAllCountries(countries, "#main-sec");
+});
+
+// search country
+const searchForm = document.querySelector("#search-form");
+const searchInput = searchForm?.querySelector("#search-input");
+searchForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const value = searchInput.value;
+  getCountryByName(value, false);
+});
+
+// click on borders countries
+
+// const border = document.querySelector("#borders");
+
+window.addEventListener("click", function (e) {
+  console.log("hello click");
+  const bordEle = e.target.closest(".border-item");
+  console.log(bordEle);
+  if (bordEle) {
+    const value = bordEle.dataset.name.toLowerCase();
+    getCountryByName(value);
+  }
 });

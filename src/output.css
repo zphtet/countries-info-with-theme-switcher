@@ -626,19 +626,20 @@ video {
   }
 }
 
-.borders{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
 .\!borders{
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
+.borders{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .border-item{
+  cursor: pointer;
   border-radius: 0.375rem;
   border-width: 1px;
   --tw-bg-opacity: 1;
@@ -683,6 +684,10 @@ video {
   margin-top: 1.25rem;
 }
 
+.mt-4{
+  margin-top: 1rem;
+}
+
 .block{
   display: block;
 }
@@ -715,12 +720,12 @@ video {
   width: 200px;
 }
 
-.w-full{
-  width: 100%;
-}
-
 .w-\[40\%\]{
   width: 40%;
+}
+
+.w-full{
+  width: 100%;
 }
 
 .max-w-\[300px\]{
@@ -861,6 +866,11 @@ video {
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.py-1{
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 .pb-12{
