@@ -1,7 +1,6 @@
 import { formatNum, getCurrency, getLanguage } from "../utils/util";
 
 import country from "country-list-js";
-// countries.registerLocale(import * from "i18n-iso-countries/langs/en.json");
 
 // utilities funcion
 
@@ -10,14 +9,12 @@ export function renderAllCountries(data, selector) {
   main.innerHTML = " ";
   const div = document.createElement("div");
   div.className = "country-cards";
-  console.log(data);
   if (!data || data.length === 0 || data.status === 404)
     return (main.innerHTML =
       "<div> <h1 class='text-3xl mb-5 dark:text-white-all'> No country found with this Name </h1> <a href='/' class='border py-1 px-4 rounded cursor-pointer mt-4 dark:text-white-all' >  Reload </a> </div>");
   data?.forEach((country) => {
     if (!country) return;
-    // console.log("from detail");
-    // console.log(country);
+
     const { name, capital, population, region, flags } = country;
     const commonName = name.common.split(" ").join(".");
     div.innerHTML += `
@@ -66,8 +63,6 @@ const renderBorderCountries = (borders) => {
     return;
   }
   borders.forEach((shortCode) => {
-    // console.log(shortCode);
-    // let found = country.findByIso3("BGD");
     const countryName = country.findByIso3(shortCode).name;
     const forName = countryName.split(" ").join(".");
 
@@ -230,4 +225,14 @@ export function renderPagination(selector) {
   
   `;
   };
+}
+
+export function removePagination(selector) {
+  const parEle = document.querySelector(selector);
+  parEle.classList.add("hidden");
+}
+
+export function reAddPagination(selector) {
+  const parEle = document.querySelector(selector);
+  parEle.classList.remove("hidden");
 }

@@ -8,12 +8,14 @@ export const formatNum = (num) => {
 };
 
 export const getCurrency = function (currencyObj) {
+  if (!currencyObj) return "None";
   const prop = Object.keys(currencyObj)[0];
   const { name, symbol } = currencyObj[prop];
   return `${name} (${symbol})`;
 };
 
 export const getLanguage = function (langObj) {
+  if (!langObj) return "None";
   const prop = Object.keys(langObj)[0];
   return langObj[prop];
 };
@@ -25,12 +27,6 @@ export const getCountryName = (shortCode) => {
   });
   return NameinEnglish.of(twoWord);
 };
-
-// export const clickPagBtnRender = (num, prev = true) => {
-//   if (prev) {
-//     //  pagCountries = countries.slice(num-1)
-//   }
-// };
 
 export const sliceArray = (array, start, limit) => {
   console.log("Hey I am working");

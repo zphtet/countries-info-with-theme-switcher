@@ -7,6 +7,8 @@ import {
   renderAllCountries,
   renderDetail,
   renderPagination,
+  removePagination,
+  reAddPagination,
 } from "../view/view";
 import { ITEM_PER_PAGE, sliceArray } from "../utils/util";
 // GLOBAL FUNCTIONS
@@ -32,15 +34,13 @@ window.addEventListener("countries_change", function () {
 });
 
 window.addEventListener("single_country", function () {
-  console.log("set single country data is ready");
-  console.log(proxiedStore.country);
   renderDetail(proxiedStore.country[0], "#main-sec");
+  removePagination("#pagination");
 });
 
 window.addEventListener("click", function (e) {
   const cardEle = e.target.closest(".card");
   const bordEle = e.target.closest(".border-item");
-  // console.log(bordEle);
   let value = null;
 
   if (bordEle) {
@@ -57,8 +57,8 @@ window.addEventListener("click", function (e) {
 window.addEventListener("click", function (e) {
   const backBtn = e.target.closest("#back-btn");
   if (!backBtn) return;
-  console.log("Back to overview");
   renderAllCountries(proxiedStore.pagCountries, "#main-sec");
+  reAddPagination("#pagination");
 });
 
 // search country
@@ -68,12 +68,22 @@ searchForm.addEventListener("submit", function (e) {
   e.preventDefault();
   const value = searchInput.value;
   getCountryByName(value, false);
+  removePagination("#pagination");
 });
+
+window.addEventListener("search_country", function (e) {
+  renderAllCountries(proxiedStore.countries, "#main-sec");
+});
+
+// select form
+
+const selectForm = document.querySelector(".select-form");
+selectForm.addEventListener("submit", (e) => e.preventDefault());
 
 // pagination
 window.addEventListener("click", function (e) {
   let btn = e.target.closest(".pag-btn");
-  console.log(btn);
+
   if (!btn) return;
   const currentNum = +btn.dataset.num;
   if (currentNum === 0 || currentNum === pagTotal + 1) return;
@@ -84,4 +94,14 @@ window.addEventListener("click", function (e) {
     ITEM_PER_PAGE
   );
   rednerPag(currentNum, pagTotal);
+});
+
+// select region
+
+const region = document.querySelector("#regions");
+
+region.addEventListener("change", function (e) {
+  const regionName = e.target.value?.toLowerCase();
+  if (!regionName) return;
+  getAllCountries(true, regionName);
 });
