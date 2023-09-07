@@ -2,21 +2,33 @@ import proxiedStore, {
   getAllCountries,
   getCountryByName,
 } from "../model/Store";
-import { LoadingUI, renderAllCountries, renderDetail } from "../view/view";
-
+import {
+  LoadingUI,
+  renderAllCountries,
+  renderDetail,
+  renderPagination,
+} from "../view/view";
+import { ITEM_PER_PAGE, sliceArray } from "../utils/util";
 // GLOBAL FUNCTIONS
 
 // 1)
 LoadingUI("#main-sec");
 // 2)
 getAllCountries();
+// 3)
+const rednerPag = renderPagination("#pagination");
 
 // Listen Global Events
+let pagTotal;
 window.addEventListener("countries_change", function () {
   console.log("loaded all countries");
-  const { countries } = proxiedStore;
-  if (countries.length > 1) countries.length = 12;
-  renderAllCountries(countries, "#main-sec");
+  const { pagCountries } = proxiedStore;
+  renderAllCountries(pagCountries, "#main-sec");
+
+  let current = 1;
+  let total = proxiedStore.countries.length;
+  pagTotal = Math.ceil(total / ITEM_PER_PAGE);
+  rednerPag(current, pagTotal);
 });
 
 window.addEventListener("single_country", function () {
@@ -24,10 +36,6 @@ window.addEventListener("single_country", function () {
   console.log(proxiedStore.country);
   renderDetail(proxiedStore.country[0], "#main-sec");
 });
-
-// window.addEventListener("select_change", function () {
-//   console.log("set single country Name");
-// });
 
 window.addEventListener("click", function (e) {
   const cardEle = e.target.closest(".card");
@@ -47,13 +55,10 @@ window.addEventListener("click", function (e) {
 });
 
 window.addEventListener("click", function (e) {
-  //   back - btn;
   const backBtn = e.target.closest("#back-btn");
   if (!backBtn) return;
   console.log("Back to overview");
-  const { countries } = proxiedStore;
-  countries.length = 12;
-  renderAllCountries(countries, "#main-sec");
+  renderAllCountries(proxiedStore.pagCountries, "#main-sec");
 });
 
 // search country
@@ -65,16 +70,18 @@ searchForm.addEventListener("submit", function (e) {
   getCountryByName(value, false);
 });
 
-// click on borders countries
-
-// const border = document.querySelector("#borders");
-
+// pagination
 window.addEventListener("click", function (e) {
-  console.log("hello click");
-  const bordEle = e.target.closest(".border-item");
-  console.log(bordEle);
-  if (bordEle) {
-    const value = bordEle.dataset.name.toLowerCase();
-    getCountryByName(value);
-  }
+  let btn = e.target.closest(".pag-btn");
+  console.log(btn);
+  if (!btn) return;
+  const currentNum = +btn.dataset.num;
+  if (currentNum === 0 || currentNum === pagTotal + 1) return;
+  let skip = (currentNum - 1) * ITEM_PER_PAGE;
+  proxiedStore.pagCountries = sliceArray(
+    proxiedStore.countries,
+    skip,
+    ITEM_PER_PAGE
+  );
+  rednerPag(currentNum, pagTotal);
 });

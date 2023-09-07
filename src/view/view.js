@@ -15,6 +15,9 @@ export function renderAllCountries(data, selector) {
     return (main.innerHTML =
       "<div> <h1 class='text-3xl mb-5 dark:text-white-all'> No country found with this Name </h1> <a href='/' class='border py-1 px-4 rounded cursor-pointer mt-4 dark:text-white-all' >  Reload </a> </div>");
   data?.forEach((country) => {
+    if (!country) return;
+    // console.log("from detail");
+    // console.log(country);
     const { name, capital, population, region, flags } = country;
     const commonName = name.common.split(" ").join(".");
     div.innerHTML += `
@@ -41,7 +44,9 @@ export function renderAllCountries(data, selector) {
               Region : <span class="font-normal">${region}</span>
             </p>
             <p class="my-1 font-bold">
-              Capital : <span class="font-normal">${capital[0]}</span>
+              Capital : <span class="font-normal">${
+                capital ? capital[0] : "None"
+              }</span>
             </p>
           </div>
         </div>
@@ -61,7 +66,7 @@ const renderBorderCountries = (borders) => {
     return;
   }
   borders.forEach((shortCode) => {
-    console.log(shortCode);
+    // console.log(shortCode);
     // let found = country.findByIso3("BGD");
     const countryName = country.findByIso3(shortCode).name;
     const forName = countryName.split(" ").join(".");
@@ -160,7 +165,7 @@ export function renderDetail(data, selector) {
               </p>
               <p class="detail-item">
                 Capital : <span class="text-normal font-normal">${
-                  capital[0]
+                  capital ? capital[0] : "None"
                 }</span>
               </p>
             </div>
@@ -186,4 +191,43 @@ export function renderDetail(data, selector) {
 export function LoadingUI(selector) {
   const parEle = document.querySelector(selector);
   parEle.innerHTML = "<h1> Loading ...  </h1>";
+}
+
+export function renderPagination(selector) {
+  const parEle = document.querySelector(selector);
+
+  return (current, total) => {
+    parEle.innerHTML = "";
+
+    parEle.innerHTML = `
+      <div class="flex justify-center items-center gap-7" id='pag-container'>
+        <button
+          class="pag-btn prev-btn px-4 py-1 rounded-md bg-white-all shadow-md hover:opacity-70 ${
+            current === 1 ? "opacity-50 hover:opacity-50" : ""
+          } "
+          data-num=${current - 1}
+        >
+          <img
+            class="w-6 h-6"
+            src="./src/assets/img/arrow-left2.svg"
+            alt="arrow left"
+          />
+        </button>
+        <p class='dark:text-white-all'>${current}/${total}</p>
+        <button
+        data-num = ${current + 1}
+          class="next-btn pag-btn px-4 py-1 rounded-md bg-white-all shadow-md hover:opacity-70 ${
+            current === total ? "opacity-50 hover:opacity-50" : ""
+          }"
+        >
+          <img
+            class="w-6 h-6"
+            src="./src/assets/img/arrow-right2.svg"
+            alt="arrow right"
+          />
+        </button>
+      </div>
+  
+  `;
+  };
 }

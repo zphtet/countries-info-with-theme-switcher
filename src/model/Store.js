@@ -1,23 +1,8 @@
-//  {
-//         "name": {
-//             "common": "Mauritania",
-//             "official": "Islamic Republic of Mauritania",
-//             "nativeName": {
-//                 "ara": {
-//                     "official": "الجمهورية الإسلامية الموريتانية",
-//                     "common": "موريتانيا"
-//                 }
-//             }
-//         },
-//         "capital": [
-//             "Nouakchott"
-//         ],
-//         "region": "Africa",
-//         "population": 4649660
-//     }
+import { ITEM_PER_PAGE } from "../utils/util";
 
 const Store = {
   countries: [],
+  pagCountries: [],
   selectedCountry: null,
   country: null,
   region: null,
@@ -27,7 +12,7 @@ const handler = {
   set(target, prop, value) {
     target[`${prop}`] = value;
     // console.log(prop);
-    if (prop === "countries") {
+    if (prop === "pagCountries") {
       window.dispatchEvent(new Event("countries_change"));
     }
     if (prop === "selectedCountry") {
@@ -47,21 +32,35 @@ export async function getAllCountries() {
   );
   const data = await res.json();
   proxiedStore.countries = data;
+  const skip = 0;
+  proxiedStore.pagCountries = [...proxiedStore.countries].slice(
+    skip,
+    ITEM_PER_PAGE
+  );
 }
 
 export async function getCountryByName(name, detail = true) {
   if (!name) return;
   // ?fullText=true
   let transformName = name.split(".").join(" ").toLowerCase();
-  const res = await fetch(
-    `https://restcountries.com/v3.1/name/${transformName}`
+
+  let res = await fetch(
+    `https://restcountries.com/v3.1/name/${transformName}?fullText=true`
   );
-  const data = await res.json();
+  const dataFullText = await res.json();
+  // console.log("from fulltext");
+  // console.log(dataFullText);
+  // console.log(res);
+  // let res2;
+  // if (dataFullText.status === 404) {
+  //   res2 = await fetch(`https://restcountries.com/v3.1/name/${transformName}`);
+  // }
+  // const data = await res2.json();
   if (!detail) {
-    proxiedStore.countries = data;
+    proxiedStore.countries = dataFullText;
     return;
   }
-  proxiedStore.country = data;
+  proxiedStore.country = dataFullText;
 }
 
 const proxiedStore = new Proxy(Store, handler);

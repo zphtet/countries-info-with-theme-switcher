@@ -25,3 +25,20 @@ export const getCountryName = (shortCode) => {
   });
   return NameinEnglish.of(twoWord);
 };
+
+// export const clickPagBtnRender = (num, prev = true) => {
+//   if (prev) {
+//     //  pagCountries = countries.slice(num-1)
+//   }
+// };
+
+export const sliceArray = (array, start, limit) => {
+  console.log("Hey I am working");
+  let result = [];
+  for (let i = start; i < start + limit; i++) {
+    result.push(array[i]);
+  }
+  return result;
+};
+
+export const ITEM_PER_PAGE = 12;
