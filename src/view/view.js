@@ -102,7 +102,7 @@ export function renderDetail(data, selector) {
         >
           <img
             class="w-5"
-            src="./src/assets/img/arrow-left.png"
+            src="/assets/img/arrow-left.png"
             alt="arrow left"
           />
           <span>Back</span>
@@ -204,7 +204,7 @@ export function renderPagination(selector) {
         >
           <img
             class="w-6 h-6"
-            src="./src/assets/img/arrow-left2.svg"
+            src="/assets/img/arrow-left2.svg"
             alt="arrow left"
           />
         </button>
@@ -217,7 +217,7 @@ export function renderPagination(selector) {
         >
           <img
             class="w-6 h-6"
-            src="./src/assets/img/arrow-right2.svg"
+            src="/assets/img/arrow-right2.svg"
             alt="arrow right"
           />
         </button>

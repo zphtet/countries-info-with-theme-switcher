@@ -5,11 +5,11 @@ const modeText = button?.querySelector("span");
 button?.addEventListener("click", function (e) {
   html?.classList.toggle("dark");
   if (!html?.classList.contains("dark")) {
-    modeIcon && (modeIcon.src = "./src/assets/img/moon.png");
+    modeIcon && (modeIcon.src = "/assets/img/moon.png");
     modeText && (modeText.textContent = "Dark Mode");
 
     return;
   }
-  modeIcon && (modeIcon.src = "./src/assets/img/sun.png");
+  modeIcon && (modeIcon.src = "/assets/img/sun.png");
   modeText && (modeText.textContent = "Light Mode");
 });
