@@ -99,7 +99,6 @@ window.addEventListener("click", function (e) {
 // select region
 
 const region = document.querySelector("#regions");
-
 region.addEventListener("change", function (e) {
   const regionName = e.target.value?.toLowerCase();
   if (!regionName) return;
